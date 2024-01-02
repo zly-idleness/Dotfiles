@@ -146,12 +146,15 @@ alias skimr="open -a skim"
 alias pintos="docker run -it --rm --name pintos --mount type=bind,source=/Users/zly/working/pintos,target=/home/PKUOS/pintos pkuflyingpig/pintos bash"
 #using dtruss to trace
 alias strace="dtruss"
-#using joshto as file manager
-alias ra="joshuto"
+#using yazi as file manager
+alias ra="yazi"
 #using batcat replace cat
 alias cat="batcat"
 # alias for lazygit
 alias lg="lazygit"
+# brew x86 alias
+alias brew86="arch -x86_64 /usr/local/homebrew/bin/brew"
+alias brewarm="arch -arm64 brew"
 # some ls alias 
 alias l="exa --header --icons --sort=modified --reverse"
 alias ll="exa --long --header --icons "
@@ -172,10 +175,19 @@ unset key
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 (( ! ${+functions[p10k]} )) || p10k finalize
 
-#set risc-v PATH
-export PATH=$PATH:/usr/local/opt/riscv-gnu-toolchain/bin
 
+#set brew prefix correct
+HOMEBREW_PREFIX=$(brew --prefix)
+export FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
+#set risc-v PATH
+export PATH="/usr/local/opt/riscv-gnu-toolchain/bin:$PATH"
+#set brew path
+export PATH="/usr/local/Homebrew/bin:$PATH"
 #set npm PATH
 export PATH="$HOME/npm/bin:$PATH"
 #set mongodb path
 export PATH="/usr/local/opt/mongodb-community@4.4/bin:$PATH"
+#set python PATH
+export PATH="/Users/zly/Library/Python/3.11/bin:$PATH"
+# opam configuration
+[[ ! -r /Users/zly/.opam/opam-init/init.zsh ]] || source /Users/zly/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
